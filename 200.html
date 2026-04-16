@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumiere Skin & Body | Where Science Meets Skin | Mosman, Sydney</title>
+    <meta name="description" content="Premium skin clinic in Mosman. Expert-led consultations, personalised treatment plans. IPL, microneedling, LED, HydraFacial, RF skin tightening. Book your consultation today.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A96E;
+            --gold-light: #D4BA8A;
+            --cream: #FAF6F0;
+            --charcoal: #2D2D2D;
+            --blush: #E8D5CA;
+            --stone: #8A8178;
+            --white: #FFFFFF;
+            --cream-dark: #F0EBE3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--charcoal);
+            background: var(--cream);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(250, 246, 240, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.75rem 2rem;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.4s ease;
+        }
+
+        nav.scrolled .nav-logo {
+            color: var(--charcoal);
+        }
+
+        .nav-cta {
+            padding: 0.6rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.6);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled .nav-cta {
+            border-color: var(--gold);
+            color: var(--charcoal);
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--white);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-video-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-video-wrap video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85) saturate(0.9);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(45, 45, 45, 0.25) 0%,
+                rgba(45, 45, 45, 0.45) 40%,
+                rgba(45, 45, 45, 0.7) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 50% 80%, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
+        }
+
+        /* ============================================
+           TEXTURE OVERLAYS & CINEMATIC ELEMENTS
+           ============================================ */
+        .texture-grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+        }
+
+        .section-texture {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-texture::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A96E' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: -20%;
+            left: 0;
+            width: 100%;
+            height: 140%;
+            object-fit: cover;
+            z-index: 0;
+            will-change: transform;
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin-bottom: 1.5rem;
+            opacity: 0.6;
+        }
+
+        .gold-line-center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Fullwidth image break sections */
+        .image-break {
+            position: relative;
+            height: 50vh;
+            min-height: 350px;
+            overflow: hidden;
+        }
+
+        .image-break img,
+        .image-break video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-break-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(45, 45, 45, 0.4);
+        }
+
+        .image-break-overlay blockquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            color: var(--white);
+            font-style: italic;
+            font-weight: 300;
+            text-align: center;
+            max-width: 700px;
+            padding: 0 2rem;
+            line-height: 1.4;
+        }
+
+        .image-break-overlay .break-label {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-tagline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .hero-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gold);
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 169, 110, 0.3);
+        }
+
+        .hero-safety {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 300;
+            opacity: 0;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            opacity: 0;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 1px;
+            height: 40px;
+            background: rgba(255,255,255,0.4);
+            margin: 0 auto;
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { transform: scaleY(1); opacity: 0.4; }
+            50% { transform: scaleY(1.5); opacity: 0.8; }
+        }
+
+        /* ============================================
+           SECTION STYLES (shared)
+           ============================================ */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            line-height: 1.25;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+        }
+
+        .section-text {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--stone);
+            max-width: 650px;
+            font-weight: 300;
+        }
+
+        /* ============================================
+           MIRROR SECTION (validate)
+           ============================================ */
+        .mirror {
+            background: var(--white);
+            text-align: center;
+        }
+
+        .mirror .section-inner {
+            max-width: 750px;
+        }
+
+        .mirror .section-text {
+            margin: 0 auto;
+            font-size: 1.05rem;
+        }
+
+        .mirror-highlight {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1.25rem 2rem;
+            background: var(--cream);
+            border-left: 3px solid var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--charcoal);
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        /* ============================================
+           BRIDGE SECTION (the answer)
+           ============================================ */
+        .bridge {
+            background: var(--cream);
+        }
+
+        .bridge-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .bridge-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .bridge-steps {
+            list-style: none;
+            counter-reset: steps;
+        }
+
+        .bridge-steps li {
+            counter-increment: steps;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--blush);
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .bridge-steps li::before {
+            content: "0" counter(steps);
+            position: absolute;
+            left: 0;
+            top: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 300;
+        }
+
+        .bridge-steps h4 {
+            font-size: 1.15rem;
+            margin-bottom: 0.35rem;
+            font-weight: 500;
+        }
+
+        .bridge-steps p {
+            font-size: 0.85rem;
+            color: var(--stone);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* ============================================
+           TREATMENTS SECTION
+           ============================================ */
+        .treatments {
+            background: var(--white);
+        }
+
+        .treatments-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .treatment-card {
+            padding: 2.5rem 2rem;
+            background: var(--cream);
+            border: 1px solid transparent;
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+
+        .treatment-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+        }
+
+        .treatment-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .treatment-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .treatment-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .treatment-card p {
+            font-size: 0.82rem;
+            color: var(--stone);
+            line-height: 1.65;
+            font-weight: 300;
+        }
+
+        .treatment-card .price {
+            display: block;
+            margin-top: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+        }
+
+        /* ============================================
+           TEAM SECTION
+           ============================================ */
+        .team {
+            background: var(--charcoal);
+            color: var(--white);
+        }
+
+        .team .section-label {
+            color: var(--gold-light);
+        }
+
+        .team .section-title {
+            color: var(--white);
+        }
+
+        .team .section-text {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            text-align: center;
+        }
+
+        .team-photo {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 2px;
+            margin-bottom: 1.25rem;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .team-card h3 {
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-card .role {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .team-card p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* ============================================
+           EXPERIENCE SECTION (the ecosystem)
+           ============================================ */
+        .experience {
+            background: var(--cream);
+        }
+
+        .experience-timeline {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.3;
+        }
+
+        .exp-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .exp-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gold);
+            margin: 0 auto 1.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .exp-step h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .exp-step p {
+            font-size: 0.78rem;
+            color: var(--stone);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* ============================================
+           MEMBERSHIP SECTION
+           ============================================ */
+        .membership {
+            background: var(--white);
+        }
+
+        .membership-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .membership-card {
+            padding: 3rem;
+            border: 1px solid var(--blush);
+            transition: all 0.3s ease;
+        }
+
+        .membership-card.featured {
+            border-color: var(--gold);
+            position: relative;
+        }
+
+        .membership-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -0.75rem;
+            left: 2rem;
+            background: var(--gold);
+            color: var(--white);
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.3rem 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+
+        .membership-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .membership-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .membership-price span {
+            font-size: 0.9rem;
+            color: var(--stone);
+        }
+
+        .membership-list {
+            list-style: none;
+        }
+
+        .membership-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--stone);
+            font-weight: 300;
+            position: relative;
+        }
+
+        .membership-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.85rem;
+            width: 8px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        /* ============================================
+           FAQ SECTION
+           ============================================ */
+        .faq {
+            background: var(--cream);
+        }
+
+        .faq-list {
+            max-width: 750px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--blush);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.25rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--charcoal);
+            text-align: left;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.2rem;
+            color: var(--gold);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding-bottom: 1.25rem;
+        }
+
+        .faq-answer p {
+            font-size: 0.88rem;
+            color: var(--stone);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ============================================
+           FINAL CTA
+           ============================================ */
+        .final-cta {
+            background: var(--charcoal);
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .final-cta .section-title {
+            color: var(--white);
+            max-width: 600px;
+            margin: 0 auto 1rem;
+        }
+
+        .final-cta .section-text {
+            color: rgba(255,255,255,0.6);
+            margin: 0 auto 2.5rem;
+            text-align: center;
+        }
+
+        .final-cta .hero-cta {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--charcoal);
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.3);
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: var(--gold-light);
+            text-decoration: none;
+        }
+
+        /* ============================================
+           CHATBOT WIDGET
+           ============================================ */
+        .chat-widget {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 999;
+        }
+
+        .chat-bubble {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(201, 169, 110, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .chat-bubble:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 30px rgba(201, 169, 110, 0.5);
+        }
+
+        .chat-bubble svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--white);
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 380px;
+            max-height: 520px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-window.open {
+            display: flex;
+        }
+
+        .chat-header {
+            background: var(--charcoal);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chat-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .chat-header-text h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .chat-header-text span {
+            font-size: 0.68rem;
+            color: var(--gold-light);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.25rem;
+            overflow-y: auto;
+            max-height: 340px;
+        }
+
+        .chat-msg {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-msg.bot .msg-bubble {
+            background: var(--cream);
+            color: var(--charcoal);
+            border-radius: 12px 12px 12px 2px;
+            padding: 0.85rem 1rem;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            max-width: 85%;
+        }
+
+        .chat-msg.user .msg-bubble {
+            background: var(--gold);
+            color: var(--white);
+            border-radius: 12px 12px 2px 12px;
+            padding: 0.85rem 1rem;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            max-width: 85%;
+            align-self: flex-end;
+        }
+
+        .chat-input-wrap {
+            padding: 0.75rem 1rem;
+            border-top: 1px solid var(--cream-dark);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: 1px solid var(--blush);
+            border-radius: 8px;
+            padding: 0.65rem 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--gold);
+        }
+
+        .chat-send {
+            background: var(--gold);
+            border: none;
+            border-radius: 8px;
+            width: 38px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .chat-send:hover {
+            background: var(--gold-light);
+        }
+
+        .chat-send svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--white);
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            section { padding: 4rem 1.5rem; }
+
+            .bridge-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .bridge-image { height: 300px; }
+
+            .treatments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .experience-timeline {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .experience-timeline::before { display: none; }
+
+            .exp-step {
+                text-align: left;
+                display: flex;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .exp-dot { margin: 0.3rem 0 0; flex-shrink: 0; }
+
+            .membership-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-window {
+                width: calc(100vw - 2rem);
+                right: -0.5rem;
+            }
+
+            nav { padding: 1rem 1.25rem; }
+            .nav-logo { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Film grain texture overlay -->
+    <div class="texture-grain"></div>
+
+    <!-- ==========================================
+         NAVIGATION
+         ========================================== -->
+    <nav id="nav">
+        <a href="#" class="nav-logo">LUMIERE</a>
+        <a href="#book" class="nav-cta">Book Consultation</a>
+    </nav>
+
+    <!-- ==========================================
+         HERO
+         ========================================== -->
+    <section class="hero" id="hero">
+        <div class="hero-video-wrap">
+            <video autoplay muted loop playsinline poster="./images/facial-treatment.jpg">
+                <source src="https://videos.pexels.com/video-files/7581433/7581433-uhd_2732_1440_25fps.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-tagline">Mosman, Sydney</div>
+            <h1>You don't need to know what Morpheus8 is.<br>You just need to know <em>who to trust.</em></h1>
+            <p class="hero-sub">Expert-led skin consultations in Mosman.<br>No jargon. No pressure. Just a plan.</p>
+            <a href="#book" class="hero-cta">Book Your Consultation</a>
+            <span class="hero-safety">$50 consultation fee, redeemable on your first treatment</span>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         MIRROR (validate their overwhelm)
+         ========================================== -->
+    <section class="mirror section-texture">
+        <div class="section-inner reveal">
+            <div class="gold-line gold-line-center"></div>
+            <div class="section-label">We understand</div>
+            <h2 class="section-title">Your skin has been trying to tell you something.</h2>
+            <p class="section-text">
+                You've noticed the changes. The spots that weren't there last summer. The texture that's shifted. You've Googled treatments at 10pm, read about microneedling and IPL and RF and a dozen other things - and ended up more confused than when you started.
+            </p>
+            <div class="mirror-highlight">
+                "You don't need to know the difference between IPL and RF. That's our job."
+            </div>
+        </div>
+    </section>
+
+    <!-- Image break: cinematic texture -->
+    <div class="image-break">
+        <video autoplay muted loop playsinline>
+            <source src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        </video>
+        <div class="image-break-overlay">
+            <blockquote>"Where science meets skin."</blockquote>
+            <span class="break-label">Lumiere Skin & Body - Mosman</span>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         BRIDGE (the answer - how it works)
+         ========================================== -->
+    <section class="bridge section-texture" id="process">
+        <div class="section-inner">
+            <div class="section-label reveal">Your journey</div>
+            <h2 class="section-title reveal">One consultation. One plan.<br>Your skin, understood.</h2>
+            <p class="section-text reveal">It starts with one conversation. We look at your skin, listen to your concerns, and build a plan that makes sense for you - your goals, your budget, your life.</p>
+
+            <div class="bridge-grid">
+                <img
+                    src="./images/consultation-woman.jpg"
+                    alt="Skin consultation at Lumiere"
+                    class="bridge-image reveal"
+                    loading="lazy"
+                >
+                <ol class="bridge-steps">
+                    <li class="reveal reveal-delay-1">
+                        <h4>Book a Consultation</h4>
+                        <p>30 minutes with our lead practitioner. We assess your skin using advanced analysis, discuss your concerns, and answer every question.</p>
+                    </li>
+                    <li class="reveal reveal-delay-2">
+                        <h4>Receive Your Plan</h4>
+                        <p>A personalised treatment pathway built around your skin, your goals, and your schedule. Clear pricing. No surprises.</p>
+                    </li>
+                    <li class="reveal reveal-delay-3">
+                        <h4>Begin Treatment</h4>
+                        <p>Your first session with your dedicated practitioner. They know your history, your plan, and your comfort level.</p>
+                    </li>
+                    <li class="reveal reveal-delay-4">
+                        <h4>Ongoing Care</h4>
+                        <p>We follow up after every treatment. Check in on your progress. Adjust your plan as your skin evolves. You're never left guessing.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         TREATMENTS
+         ========================================== -->
+    <section class="treatments" id="treatments">
+        <div class="section-inner">
+            <div class="section-label reveal">Treatments</div>
+            <h2 class="section-title reveal">Clinical care, tailored to you.</h2>
+            <p class="section-text reveal">Every treatment plan is personalised. Here are the tools we use to get your skin where you want it to be.</p>
+
+            <div class="treatments-grid">
+                <div class="treatment-card reveal reveal-delay-1">
+                    <div class="treatment-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    </div>
+                    <h3>IPL Photorejuvenation</h3>
+                    <p>Targets pigmentation, sun damage, redness, and uneven skin tone beneath the surface. Visible improvement in 3 to 6 sessions.</p>
+                    <span class="price">From $299</span>
+                </div>
+
+                <div class="treatment-card reveal reveal-delay-2">
+                    <div class="treatment-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <h3>Microneedling</h3>
+                    <p>Stimulates your skin's natural collagen production through precision micro-channels. Ideal for fine lines, scarring, and texture.</p>
+                    <span class="price">From $350</span>
+                </div>
+
+                <div class="treatment-card reveal reveal-delay-3">
+                    <div class="treatment-icon">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    </div>
+                    <h3>HydraFacial</h3>
+                    <p>Multi-step cleanse, peel, extract, and hydrate. Zero downtime. Walk out glowing. Our most popular lunchtime treatment.</p>
+                    <span class="price">From $249</span>
+                </div>
+
+                <div class="treatment-card reveal reveal-delay-1">
+                    <div class="treatment-icon">
+                        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                    </div>
+                    <h3>RF Skin Tightening</h3>
+                    <p>Radiofrequency energy stimulates deep collagen and elastin production. Targets skin laxity, jawline definition, and firmness.</p>
+                    <span class="price">From $399</span>
+                </div>
+
+                <div class="treatment-card reveal reveal-delay-2">
+                    <div class="treatment-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3>LED Light Therapy</h3>
+                    <p>Different wavelengths target acne, redness, and fine lines at a cellular level. No downtime. Pairs beautifully with any treatment.</p>
+                    <span class="price">From $75</span>
+                </div>
+
+                <div class="treatment-card reveal reveal-delay-3">
+                    <div class="treatment-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </div>
+                    <h3>Cosmetic Consultations</h3>
+                    <p>Private consultations with our medical practitioner to discuss all available treatment options for lines, volume, and facial contouring.</p>
+                    <span class="price">From $120</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image break: treatment close-up -->
+    <div class="image-break">
+        <img src="./images/led-treatment-face.jpg" alt="LED treatment" loading="lazy">
+        <div class="image-break-overlay" style="background: rgba(45,45,45,0.3);">
+            <blockquote>"Your practitioner knows your skin, your plan, and your comfort level."</blockquote>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         TEAM
+         ========================================== -->
+    <section class="team" id="team">
+        <div class="section-inner">
+            <div class="section-label reveal">Your practitioners</div>
+            <h2 class="section-title reveal">The hands behind the science.</h2>
+            <p class="section-text reveal">Every treatment at Lumiere is performed by a qualified, experienced practitioner. Not a sales consultant. Not a trainee. The person treating your skin is the person who built your plan.</p>
+
+            <div class="team-grid">
+                <div class="team-card reveal reveal-delay-1">
+                    <div class="team-photo" style="background: linear-gradient(135deg, var(--blush) 0%, var(--gold) 100%); opacity: 0.5;"></div>
+                    <h3>Sophie Laurent</h3>
+                    <div class="role">Clinic Director & Lead Practitioner</div>
+                    <p>BN, Grad Cert Cosmetic Nursing, 14 years in medical aesthetics. Sophie personally conducts every new client consultation.</p>
+                </div>
+
+                <div class="team-card reveal reveal-delay-2">
+                    <div class="team-photo" style="background: linear-gradient(135deg, var(--cream-dark) 0%, var(--blush) 100%); opacity: 0.5;"></div>
+                    <h3>Megan Holt</h3>
+                    <div class="role">Senior Dermal Therapist</div>
+                    <p>Adv Dip Dermal Therapies. Specialises in microneedling, peels, and HydraFacial. Known for putting first-timers at ease.</p>
+                </div>
+
+                <div class="team-card reveal reveal-delay-3">
+                    <div class="team-photo" style="background: linear-gradient(135deg, rgba(201,169,110,0.3) 0%, rgba(45,45,45,0.3) 100%); opacity: 0.5;"></div>
+                    <h3>Dr. James Whitfield</h3>
+                    <div class="role">Consulting Medical Practitioner</div>
+                    <p>MBBS, FRACGP. 10 years in cosmetic medicine. Available Wednesdays and Thursdays for medical consultations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image break: serum video -->
+    <div class="image-break">
+        <video autoplay muted loop playsinline>
+            <source src="https://videos.pexels.com/video-files/7582852/7582852-uhd_2732_1440_25fps.mp4" type="video/mp4">
+        </video>
+        <div class="image-break-overlay" style="background: rgba(45,45,45,0.25);">
+            <blockquote>"Your care doesn't end when the treatment does."</blockquote>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         EXPERIENCE (the ecosystem - ongoing care)
+         ========================================== -->
+    <section class="experience section-texture" id="experience">
+        <div class="section-inner">
+            <div class="section-label reveal">The Lumiere experience</div>
+            <h2 class="section-title reveal">Your care doesn't end when the treatment does.</h2>
+            <p class="section-text reveal">We follow up. We check in. We adjust your plan as your skin evolves. Every touchpoint is designed to make sure you're supported - not just during your appointment, but between them.</p>
+
+            <div class="experience-timeline">
+                <div class="exp-step reveal reveal-delay-1">
+                    <div class="exp-dot"></div>
+                    <div>
+                        <h4>Consult</h4>
+                        <p>Skin analysis, treatment plan, clear pricing. You leave knowing exactly what's next.</p>
+                    </div>
+                </div>
+                <div class="exp-step reveal reveal-delay-2">
+                    <div class="exp-dot"></div>
+                    <div>
+                        <h4>Treat</h4>
+                        <p>Your practitioner. Your plan. Comfort and clinical care at every step.</p>
+                    </div>
+                </div>
+                <div class="exp-step reveal reveal-delay-3">
+                    <div class="exp-dot"></div>
+                    <div>
+                        <h4>Recover</h4>
+                        <p>Post-care guidance and check-ins. We ask how you're feeling - you never have to wonder.</p>
+                    </div>
+                </div>
+                <div class="exp-step reveal reveal-delay-4">
+                    <div class="exp-dot"></div>
+                    <div>
+                        <h4>Progress</h4>
+                        <p>Your next session is prompted at the right time. Your plan evolves with your skin.</p>
+                    </div>
+                </div>
+                <div class="exp-step reveal reveal-delay-5">
+                    <div class="exp-dot"></div>
+                    <div>
+                        <h4>Maintain</h4>
+                        <p>Ongoing care, home care guidance, and a team who knows your skin inside and out.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         MEMBERSHIP
+         ========================================== -->
+    <section class="membership" id="membership">
+        <div class="section-inner">
+            <div class="section-label reveal">Membership</div>
+            <h2 class="section-title reveal">Consistent care. Beautiful skin.</h2>
+            <p class="section-text reveal">Our membership keeps the momentum going - a monthly treatment, product savings, and priority access to your practitioner.</p>
+
+            <div class="membership-cards">
+                <div class="membership-card reveal reveal-delay-1">
+                    <h3>Lumiere Membership</h3>
+                    <div class="membership-price">$249<span> /month</span></div>
+                    <ul class="membership-list">
+                        <li>1 signature facial each month</li>
+                        <li>10% off all additional treatments</li>
+                        <li>15% off retail skincare</li>
+                        <li>Priority booking</li>
+                        <li>Annual skin analysis with Sophie</li>
+                        <li>No lock-in - cancel anytime</li>
+                    </ul>
+                </div>
+
+                <div class="membership-card featured reveal reveal-delay-2">
+                    <h3>Lumiere Premium</h3>
+                    <div class="membership-price">$399<span> /month</span></div>
+                    <ul class="membership-list">
+                        <li>1 advanced treatment monthly</li>
+                        <li>20% off retail skincare</li>
+                        <li>Complimentary LED with every visit</li>
+                        <li>Quarterly skin review with Sophie</li>
+                        <li>Priority booking</li>
+                        <li>No lock-in - cancel anytime</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image break: skincare products -->
+    <div class="image-break" style="height: 35vh; min-height: 250px;">
+        <img src="./images/skincare-products.jpg" alt="Medical-grade skincare" loading="lazy">
+        <div class="image-break-overlay" style="background: linear-gradient(135deg, rgba(45,45,45,0.5) 0%, rgba(201,169,110,0.15) 100%);">
+            <blockquote>"Medical-grade skincare. Personally prescribed."</blockquote>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         FAQ
+         ========================================== -->
+    <section class="faq section-texture" id="faq">
+        <div class="section-inner">
+            <div class="section-label reveal">Common questions</div>
+            <h2 class="section-title reveal" style="text-align: center;">Everything you need to know.</h2>
+
+            <div class="faq-list">
+                <div class="faq-item reveal">
+                    <button class="faq-question">I've never been to a skin clinic. What should I expect?</button>
+                    <div class="faq-answer">
+                        <p>Your first visit is a 30-minute consultation - not a treatment. We look at your skin using advanced analysis, ask about your concerns and goals, and put together a plan. There's no pressure to book anything on the day. You'll leave with clarity, not a sales pitch.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question">Do the treatments hurt?</button>
+                    <div class="faq-answer">
+                        <p>Comfort is always a priority. LED therapy and HydraFacial have zero discomfort. Microneedling and IPL involve mild sensation - most clients describe it as very tolerable. We use numbing cream where appropriate and adjust all settings to your comfort level. Most people are pleasantly surprised.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question">How do I know which treatment is right for me?</button>
+                    <div class="faq-answer">
+                        <p>That's exactly what the consultation is for. You don't need to come in knowing what you want - that's our expertise. Sophie or Megan will assess your skin and recommend a pathway tailored to your specific concerns, skin type, and budget.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question">How much downtime is involved?</button>
+                    <div class="faq-answer">
+                        <p>It depends on the treatment. LED and HydraFacial have zero downtime - they're true lunchtime treatments. Microneedling involves 24 to 48 hours of mild redness. IPL-treated areas may darken briefly before flaking off over 7 to 14 days. We give you a clear timeline for every treatment before you commit.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question">Do you offer payment plans?</button>
+                    <div class="faq-answer">
+                        <p>Yes. We accept Afterpay (4 interest-free payments) for treatments and products under $2,000, and Zip Pay or Zip Money for larger treatment courses. We want your treatment plan to work for your budget too.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question">What's your cancellation policy?</button>
+                    <div class="faq-answer">
+                        <p>We require 24 hours notice for cancellations or reschedules. Late cancellations within 24 hours forfeit the booking deposit. We understand life happens - just let us know as early as you can.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FINAL CTA
+         ========================================== -->
+    <section class="final-cta" id="book">
+        <div class="section-inner">
+            <h2 class="section-title reveal">Walk in with questions.<br>Walk out with clarity.</h2>
+            <p class="section-text reveal">Your consultation is 30 minutes. Your plan is personalised. Your first step is easy.</p>
+            <a href="#" class="hero-cta reveal">Book Your Consultation</a>
+            <span class="hero-safety reveal" style="color: rgba(255,255,255,0.4); display: block; margin-top: 1rem; font-size: 0.75rem;">$50 consultation fee, redeemable on your first treatment. Afterpay available.</span>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer>
+        <p>
+            Lumiere Skin & Body | Suite 3, 12 Avenue Road, Mosman NSW 2088<br>
+            Mon-Fri 9am-6pm | Sat 9am-3pm | <a href="tel:+61299600000">(02) 9960 0000</a><br><br>
+            Results vary between individuals. All treatments require a consultation to assess suitability.<br>
+            &copy; 2026 Lumiere Skin & Body. All rights reserved.
+        </p>
+    </footer>
+
+    <!-- ==========================================
+         CHATBOT WIDGET
+         ========================================== -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div class="chat-avatar">L</div>
+                <div class="chat-header-text">
+                    <h4>Lumiere</h4>
+                    <span>Online now</span>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-msg bot">
+                    <div class="msg-bubble">Hi there! Welcome to Lumiere Skin & Body. I can help with treatment information, pricing, or booking a consultation. What can I help you with today?</div>
+                </div>
+            </div>
+            <div class="chat-input-wrap">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." autocomplete="off">
+                <button class="chat-send" id="chatSend">
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+        </div>
+        <div class="chat-bubble" id="chatBubble">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         SCRIPTS
+         ========================================== -->
+    <script>
+        // Nav scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        // Hero animations
+        window.addEventListener('load', () => {
+            const heroElements = document.querySelectorAll('.hero-tagline, .hero h1, .hero-sub, .hero-cta, .hero-safety, .scroll-indicator');
+            heroElements.forEach((el, i) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                    el.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                }, 300 + (i * 200));
+            });
+        });
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item.active').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // Chatbot widget
+        const chatBubble = document.getElementById('chatBubble');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatInput = document.getElementById('chatInput');
+        const chatSend = document.getElementById('chatSend');
+        const chatMessages = document.getElementById('chatMessages');
+
+        chatBubble.addEventListener('click', () => {
+            chatWindow.classList.toggle('open');
+            if (chatWindow.classList.contains('open')) {
+                chatInput.focus();
+            }
+        });
+
+        // Demo chat responses
+        const demoResponses = {
+            'default': "That's a great question! I'd love to help. For the most personalised advice, I'd recommend booking a consultation with Sophie or Megan. They can assess your skin and create a plan tailored to you. Would you like me to book one for you?",
+            'price': "Our treatments start from $75 for LED therapy, $249 for HydraFacial, $299 for IPL, and $350 for microneedling. Course pricing saves you up to 15%. Would you like to know more about a specific treatment?",
+            'book': "I'd love to book you in! Our consultations are $50, redeemable on your first treatment. Sophie has availability this week on Wednesday at 10am or Thursday at 2pm. Which works better for you?",
+            'hurt': "Comfort is always our priority. Most clients are pleasantly surprised - treatments like LED and HydraFacial have zero discomfort. For microneedling and IPL, we use numbing cream and adjust settings to your tolerance. You're in control the entire time.",
+            'pigmentation': "Pigmentation and sun damage are some of the most common concerns we treat. IPL photorejuvenation is often the first recommendation - it targets pigment beneath the surface. A consultation with Sophie will pinpoint exactly what's happening with your skin. Shall I book one?",
+            'membership': "Our membership starts at $249/month and includes a monthly facial, 10-15% off skincare, and priority booking. It's the easiest way to keep your skin on track. No lock-in - cancel anytime. Want more details?"
+        };
+
+        function getResponse(msg) {
+            const lower = msg.toLowerCase();
+            if (lower.includes('price') || lower.includes('cost') || lower.includes('how much')) return demoResponses.price;
+            if (lower.includes('book') || lower.includes('appointment') || lower.includes('available')) return demoResponses.book;
+            if (lower.includes('hurt') || lower.includes('pain') || lower.includes('scared')) return demoResponses.hurt;
+            if (lower.includes('pigment') || lower.includes('sun') || lower.includes('spot') || lower.includes('brown')) return demoResponses.pigmentation;
+            if (lower.includes('member') || lower.includes('monthly')) return demoResponses.membership;
+            return demoResponses.default;
+        }
+
+        function sendMessage() {
+            const msg = chatInput.value.trim();
+            if (!msg) return;
+
+            // User message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.innerHTML = '<div class="msg-bubble">' + msg.replace(/</g, '&lt;') + '</div>';
+            chatMessages.appendChild(userDiv);
+            chatInput.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Bot response with typing delay
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg bot';
+                botDiv.innerHTML = '<div class="msg-bubble">' + getResponse(msg) + '</div>';
+                chatMessages.appendChild(botDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 800 + Math.random() * 600);
+        }
+
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+
+</body>
+</html>
