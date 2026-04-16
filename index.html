@@ -1028,6 +1028,31 @@
             fill: var(--white);
         }
 
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            max-width: 90%;
+        }
+
+        .quick-reply {
+            background: none;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.4rem 0.8rem;
+            border-radius: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .quick-reply:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
         /* ============================================
            ANIMATIONS
            ============================================ */
@@ -1508,7 +1533,7 @@
             </div>
             <div class="chat-messages" id="chatMessages">
                 <div class="chat-msg bot">
-                    <div class="msg-bubble">Hi there! Welcome to Lumiere Skin & Body. I can help with treatment information, pricing, or booking a consultation. What can I help you with today?</div>
+                    <div class="msg-bubble">Hi! Welcome to Lumiere Skin & Body. I'm here to help you find the right treatment and practitioner for your skin. To get started, what's your first name?</div>
                 </div>
             </div>
             <div class="chat-input-wrap">
@@ -1582,24 +1607,284 @@
             }
         });
 
-        // Demo chat responses
-        const demoResponses = {
-            'default': "That's a great question! I'd love to help. For the most personalised advice, I'd recommend booking a consultation with Sophie or Megan. They can assess your skin and create a plan tailored to you. Would you like me to book one for you?",
-            'price': "Our treatments start from $75 for LED therapy, $249 for HydraFacial, $299 for IPL, and $350 for microneedling. Course pricing saves you up to 15%. Would you like to know more about a specific treatment?",
-            'book': "I'd love to book you in! Our consultations are $50, redeemable on your first treatment. Sophie has availability this week on Wednesday at 10am or Thursday at 2pm. Which works better for you?",
-            'hurt': "Comfort is always our priority. Most clients are pleasantly surprised - treatments like LED and HydraFacial have zero discomfort. For microneedling and IPL, we use numbing cream and adjust settings to your tolerance. You're in control the entire time.",
-            'pigmentation': "Pigmentation and sun damage are some of the most common concerns we treat. IPL photorejuvenation is often the first recommendation - it targets pigment beneath the surface. A consultation with Sophie will pinpoint exactly what's happening with your skin. Shall I book one?",
-            'membership': "Our membership starts at $249/month and includes a monthly facial, 10-15% off skincare, and priority booking. It's the easiest way to keep your skin on track. No lock-in - cancel anytime. Want more details?"
+        // ==========================================
+        // INTELLIGENT TRIAGE CHATBOT
+        // Conversational flow: qualify > recommend path > route to practitioner
+        // ==========================================
+
+        let chatState = 'greeting'; // greeting, concern, duration, previous, sensitivity, recommend, booking, general
+        let clientProfile = {
+            name: '',
+            concern: '',
+            duration: '',
+            previousTreatments: '',
+            sensitivity: '',
+            recommendedPath: '',
+            practitioner: ''
         };
 
-        function getResponse(msg) {
+        // Treatment pathway logic
+        const pathways = {
+            pigmentation: {
+                treatments: 'IPL photorejuvenation combined with targeted peels',
+                practitioner: 'Sophie',
+                practitionerTitle: 'our lead practitioner and registered nurse',
+                reason: 'Sophie specialises in pigmentation and has 14 years of experience with light-based therapies',
+                timeline: '3-6 sessions over 3-6 months',
+                startPrice: '$299'
+            },
+            ageing: {
+                treatments: 'Morpheus8 RF microneedling with LED support',
+                practitioner: 'Sophie',
+                practitionerTitle: 'our lead practitioner',
+                reason: 'Morpheus8 is our most advanced treatment for skin tightening and deep collagen renewal - Sophie is our certified Morpheus8 practitioner',
+                timeline: '3-6 sessions over 4-6 months',
+                startPrice: '$799'
+            },
+            texture: {
+                treatments: 'microneedling with a targeted home care plan',
+                practitioner: 'Megan',
+                practitionerTitle: 'our senior dermal therapist',
+                reason: 'Megan has a real talent with texture concerns and her microneedling results are exceptional',
+                timeline: '3-4 sessions over 3-4 months',
+                startPrice: '$350'
+            },
+            acne: {
+                treatments: 'LED blue light therapy combined with clinical-grade peels',
+                practitioner: 'Megan',
+                practitionerTitle: 'our senior dermal therapist',
+                reason: "Megan specialises in acne and congestion - she'll build a plan that targets the cause, not just the symptoms",
+                timeline: '6-8 sessions over 2-3 months',
+                startPrice: '$75'
+            },
+            glow: {
+                treatments: 'HydraFacial Deluxe with LED add-on',
+                practitioner: 'Megan',
+                practitionerTitle: 'our senior dermal therapist',
+                reason: "Megan is our HydraFacial specialist - clients love her. She'll get your skin glowing and recommend the right home care to keep it that way",
+                timeline: 'Monthly maintenance',
+                startPrice: '$349'
+            },
+            lines: {
+                treatments: 'a private consultation to discuss all available options for lines and facial contouring',
+                practitioner: 'Dr. James Whitfield',
+                practitionerTitle: 'our consulting medical practitioner',
+                reason: 'Dr. Whitfield has 10 years in cosmetic medicine and provides thorough, evidence-based consultations',
+                timeline: 'Discussed during your consultation',
+                startPrice: '$120 consultation'
+            },
+            body: {
+                treatments: 'CoolSculpting body contouring with a complimentary assessment',
+                practitioner: 'Sophie',
+                practitionerTitle: 'our body contouring specialist',
+                reason: 'Sophie conducts all CoolSculpting assessments and builds plans based on your specific goals',
+                timeline: 'Typically 1-2 sessions per area',
+                startPrice: '$750'
+            },
+            unsure: {
+                treatments: 'a comprehensive skin analysis consultation',
+                practitioner: 'Sophie',
+                practitionerTitle: 'our clinic director',
+                reason: "that's completely normal - most of our clients feel the same way. Sophie personally conducts every new client consultation and she'll map out exactly what's happening with your skin",
+                timeline: '30 minutes',
+                startPrice: '$50 (redeemable on treatment)'
+            }
+        };
+
+        function detectConcern(msg) {
             const lower = msg.toLowerCase();
-            if (lower.includes('price') || lower.includes('cost') || lower.includes('how much')) return demoResponses.price;
-            if (lower.includes('book') || lower.includes('appointment') || lower.includes('available')) return demoResponses.book;
-            if (lower.includes('hurt') || lower.includes('pain') || lower.includes('scared')) return demoResponses.hurt;
-            if (lower.includes('pigment') || lower.includes('sun') || lower.includes('spot') || lower.includes('brown')) return demoResponses.pigmentation;
-            if (lower.includes('member') || lower.includes('monthly')) return demoResponses.membership;
-            return demoResponses.default;
+            if (lower.match(/pigment|sun\s?dam|brown\s?spot|dark\s?spot|age\s?spot|melasma|uneven\s?tone|discolour/)) return 'pigmentation';
+            if (lower.match(/wrinkle|line[s]?\b|sag|droop|firm|tight|lax|jowl|lift|morpheus|rf\b/)) return 'ageing';
+            if (lower.match(/texture|scar|rough|pore|bumpy|uneven\s?skin|microneedl/)) return 'texture';
+            if (lower.match(/acne|breakout|pimple|congestion|oily|blemish/)) return 'acne';
+            if (lower.match(/glow|hydrat|dull|dry|tired|refresh|radian|facial|hydrafacial/)) return 'glow';
+            if (lower.match(/inject|filler|lip|volume|contour|botox|anti.?wrinkle|cosmetic\s?consult/)) return 'lines';
+            if (lower.match(/body|fat|cool\s?sculpt|cellulite|tone|slim|stubborn/)) return 'body';
+            if (lower.match(/not\s?sure|don.?t\s?know|no\s?idea|everything|general|help|what\s?do\s?you/)) return 'unsure';
+            return null;
+        }
+
+        function addBotMessage(text, delay) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'chat-msg bot';
+                    botDiv.innerHTML = '<div class="msg-bubble">' + text + '</div>';
+                    chatMessages.appendChild(botDiv);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    resolve();
+                }, delay || 600);
+            });
+        }
+
+        function addQuickReplies(options) {
+            const wrap = document.createElement('div');
+            wrap.className = 'chat-msg bot';
+            wrap.innerHTML = '<div class="quick-replies">' +
+                options.map(o => '<button class="quick-reply" onclick="handleQuickReply(\'' + o.replace(/'/g, "\\'") + '\')">' + o + '</button>').join('') +
+                '</div>';
+            chatMessages.appendChild(wrap);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleQuickReply(text) {
+            // Remove quick reply buttons
+            document.querySelectorAll('.quick-replies').forEach(el => el.parentElement.remove());
+            // Simulate user sending this message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.innerHTML = '<div class="msg-bubble">' + text + '</div>';
+            chatMessages.appendChild(userDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            processMessage(text);
+        }
+
+        async function processMessage(msg) {
+            const lower = msg.toLowerCase();
+
+            switch(chatState) {
+                case 'greeting':
+                    clientProfile.name = msg.split(' ')[0];
+                    chatState = 'concern';
+                    await addBotMessage("Lovely to meet you, " + clientProfile.name + "! To help me point you in the right direction, could you tell me what's been on your mind about your skin? What's the main thing you'd like to address?", 800);
+                    addQuickReplies(['Sun damage & pigmentation', 'Fine lines & firmness', 'Skin texture & scarring', 'Acne & breakouts', 'Just want a glow-up', 'Not sure - need guidance']);
+                    break;
+
+                case 'concern':
+                    let concern = detectConcern(msg);
+                    if (!concern) {
+                        // Try to match quick reply text
+                        if (lower.includes('sun') || lower.includes('pigment')) concern = 'pigmentation';
+                        else if (lower.includes('line') || lower.includes('firm')) concern = 'ageing';
+                        else if (lower.includes('texture') || lower.includes('scar')) concern = 'texture';
+                        else if (lower.includes('acne') || lower.includes('breakout')) concern = 'acne';
+                        else if (lower.includes('glow')) concern = 'glow';
+                        else if (lower.includes('not sure') || lower.includes('guidance')) concern = 'unsure';
+                        else concern = 'unsure';
+                    }
+
+                    // TGA compliance: redirect injectable queries
+                    if (concern === 'lines') {
+                        clientProfile.concern = 'lines';
+                        chatState = 'recommend';
+                        const path = pathways.lines;
+                        await addBotMessage("Thanks for sharing that, " + clientProfile.name + ". We work with a lot of clients on concerns around lines and facial contouring, and there are some really effective options available.", 800);
+                        await addBotMessage("Because some of these treatments fall under medical regulations, the best way to explore your options is through " + path.treatments + ".", 1200);
+                        await addBotMessage("<strong>" + path.practitioner + "</strong>, " + path.practitionerTitle + ", is available Wednesdays and Thursdays. " + path.reason + ".", 1000);
+                        await addBotMessage("The consultation is " + path.startPrice + " and takes about 30 minutes. He'll walk you through everything - options, pricing, timeline, all of it. No pressure, just information. Would you like me to book you in?", 1000);
+                        chatState = 'booking';
+                        addQuickReplies(['Yes, book me in', 'What days are available?', 'I have more questions first']);
+                        break;
+                    }
+
+                    clientProfile.concern = concern;
+                    chatState = 'duration';
+                    await addBotMessage("Got it - " + (concern === 'unsure' ? "no worries at all, that's exactly what we're here for" : concern.replace('ageing', 'fine lines and firmness').replace('glow', 'wanting that glow') + " is something we work with every day") + ". How long has this been a concern for you?", 900);
+                    addQuickReplies(['Just noticed recently', 'A few months', 'Years - it\'s been bugging me', 'Getting worse lately']);
+                    break;
+
+                case 'duration':
+                    clientProfile.duration = msg;
+                    chatState = 'previous';
+                    await addBotMessage("Thanks for that. Have you had any clinical skin treatments before, or would this be your first time at a skin clinic?", 800);
+                    addQuickReplies(['First time - brand new to this', 'Had facials at a day spa', 'Yes, I\'ve had clinical treatments', 'Had some but it\'s been a while']);
+                    break;
+
+                case 'previous':
+                    clientProfile.previousTreatments = msg;
+                    chatState = 'recommend';
+
+                    const path = pathways[clientProfile.concern];
+                    const isFirstTimer = lower.includes('first') || lower.includes('new') || lower.includes('never');
+
+                    await addBotMessage("Perfect - I have a really clear picture now. Based on everything you've told me, here's what I'd recommend:", 900);
+
+                    let recommendation = "<strong>Your recommended pathway:</strong> " + path.treatments + "<br><br>";
+                    recommendation += "<strong>Your practitioner:</strong> " + path.practitioner + ", " + path.practitionerTitle + ". " + path.reason + ".<br><br>";
+                    recommendation += "<strong>Expected timeline:</strong> " + path.timeline + "<br>";
+                    recommendation += "<strong>Starting from:</strong> " + path.startPrice;
+
+                    await addBotMessage(recommendation, 1400);
+
+                    if (isFirstTimer) {
+                        await addBotMessage("Since this is your first time, " + path.practitioner + " will start with a thorough skin analysis to confirm the right approach before any treatment. There's absolutely no pressure - the consultation is about understanding your skin and giving you a clear plan.", 1200);
+                    }
+
+                    await addBotMessage("Would you like me to book your consultation with " + path.practitioner + "? It's $50, fully redeemable on your first treatment.", 800);
+                    clientProfile.practitioner = path.practitioner;
+                    chatState = 'booking';
+                    addQuickReplies(['Yes, book me in!', 'What days are available?', 'How much will the full course cost?']);
+                    break;
+
+                case 'booking':
+                    if (lower.includes('yes') || lower.includes('book')) {
+                        chatState = 'collect_details';
+                        const prac = clientProfile.practitioner;
+                        let availability = '';
+                        if (prac === 'Dr. James Whitfield') {
+                            availability = 'Dr. Whitfield is available <strong>Wednesday 10am, 11:30am, or 2pm</strong> and <strong>Thursday 9:30am or 3pm</strong> this week.';
+                        } else if (prac === 'Megan') {
+                            availability = 'Megan is available <strong>Tuesday 10am or 2pm</strong>, <strong>Wednesday 11am</strong>, <strong>Thursday 9am</strong>, or <strong>Saturday 10am</strong> this week.';
+                        } else {
+                            availability = 'Sophie is available <strong>Monday 2pm</strong>, <strong>Wednesday 10am or 3pm</strong>, or <strong>Friday 11am</strong> this week.';
+                        }
+                        await addBotMessage("Wonderful! " + availability + " Which time suits you best?", 800);
+                    } else if (lower.includes('day') || lower.includes('avail') || lower.includes('when')) {
+                        const prac = clientProfile.practitioner;
+                        let days = '';
+                        if (prac === 'Dr. James Whitfield') days = 'Wednesdays and Thursdays';
+                        else if (prac === 'Megan') days = 'Tuesday through Saturday';
+                        else days = 'Monday through Friday, plus alternate Saturdays';
+                        await addBotMessage(prac + " is available " + days + ". I can see some openings this week - would you like me to check specific times?", 800);
+                        addQuickReplies(['Yes please', 'Next week would be better']);
+                    } else if (lower.includes('cost') || lower.includes('much') || lower.includes('price')) {
+                        const path = pathways[clientProfile.concern];
+                        await addBotMessage(clientProfile.practitioner + " will give you a complete pricing breakdown during your consultation, tailored to exactly what your skin needs. The consultation itself is " + (clientProfile.concern === 'lines' ? '$120' : '$50') + " and that's redeemable on treatment. We also offer Afterpay and Zip for courses. Ready to book?", 1000);
+                        addQuickReplies(['Yes, book me in!', 'I need to think about it']);
+                    } else {
+                        await addBotMessage("Of course - what would you like to know? I'm happy to answer any questions before we book.", 700);
+                    }
+                    break;
+
+                case 'collect_details':
+                    await addBotMessage("Booked! I've reserved that spot for you with " + clientProfile.practitioner + ". I'll just need your email address and phone number to confirm. A $50 deposit secures the appointment (redeemable on treatment).", 1000);
+                    await addBotMessage("You'll receive a confirmation email with:<br>- Your appointment details<br>- A link to complete your intake form<br>- Pre-appointment checklist<br>- Parking info for Mosman<br><br>" + clientProfile.practitioner + " will review your intake form before your visit, so you won't need to repeat anything when you arrive. We're looking forward to meeting you, " + clientProfile.name + "! \u2728", 1400);
+                    chatState = 'done';
+                    break;
+
+                case 'done':
+                    await addBotMessage("If you have any other questions before your appointment, just message us here or call (02) 9960 0000. See you soon!", 700);
+                    break;
+
+                default:
+                    await addBotMessage("I'd love to help with that. Could you tell me a bit more about what you're looking for?", 600);
+                    chatState = 'concern';
+                    addQuickReplies(['Sun damage & pigmentation', 'Fine lines & firmness', 'Skin texture & scarring', 'Acne & breakouts', 'Just want a glow-up', 'Not sure - need guidance']);
+            }
+        }
+
+        // Also handle general questions at any point
+        function handleGeneralQuery(msg) {
+            const lower = msg.toLowerCase();
+            if (lower.includes('price') || lower.includes('cost') || lower.includes('how much')) {
+                return "Our treatments range from $75 (LED) to $999 (Morpheus8 face & neck). Course pricing saves up to 15%. For the most accurate pricing, our practitioners build a plan specific to your skin during your consultation. Want me to help you figure out the right pathway?";
+            }
+            if (lower.includes('hurt') || lower.includes('pain') || lower.includes('scared') || lower.includes('nervous')) {
+                return "Completely understandable - that's one of the most common questions we hear. Most clients are genuinely surprised at how comfortable treatments are. We use numbing cream where needed and adjust every setting to your comfort level. LED and HydraFacial have zero discomfort. You're in control the entire time.";
+            }
+            if (lower.includes('member') || lower.includes('monthly')) {
+                return "Our Lumiere Membership is $249/month - includes a monthly facial, 10-15% off skincare, and priority booking. No lock-in. Our Premium membership at $399/month includes a monthly advanced treatment plus 20% off skincare. Want to know more?";
+            }
+            if (lower.includes('hour') || lower.includes('open') || lower.includes('close')) {
+                return "We're open Monday to Friday 9am-6pm and Saturday 9am-3pm. Sunday we're closed. Saturday appointments fill fastest - book early!";
+            }
+            if (lower.includes('where') || lower.includes('locat') || lower.includes('address') || lower.includes('park')) {
+                return "We're at Suite 3, 12 Avenue Road, Mosman NSW 2088. Ground floor with discreet entry. Free street parking on Avenue Road, or Bridgepoint car park is a 2-minute walk.";
+            }
+            if (lower.includes('cancel') || lower.includes('reschedul')) {
+                return "We ask for 24 hours notice for cancellations or reschedules. Late cancellations within 24 hours forfeit the booking deposit. We totally understand life happens - just let us know as early as you can.";
+            }
+            return null;
         }
 
         function sendMessage() {
@@ -1614,14 +1899,20 @@
             chatInput.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Bot response with typing delay
-            setTimeout(() => {
-                const botDiv = document.createElement('div');
-                botDiv.className = 'chat-msg bot';
-                botDiv.innerHTML = '<div class="msg-bubble">' + getResponse(msg) + '</div>';
-                chatMessages.appendChild(botDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 800 + Math.random() * 600);
+            // Remove any existing quick replies
+            document.querySelectorAll('.quick-replies').forEach(el => el.parentElement.remove());
+
+            // Check for general queries first (can be asked at any stage)
+            const generalResponse = handleGeneralQuery(msg);
+            if (generalResponse && chatState !== 'greeting' && chatState !== 'concern') {
+                setTimeout(() => {
+                    addBotMessage(generalResponse, 0);
+                }, 700);
+                return;
+            }
+
+            // Process through the triage flow
+            processMessage(msg);
         }
 
         chatSend.addEventListener('click', sendMessage);
