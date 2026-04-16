@@ -1394,44 +1394,7 @@
         </div>
     </section>
 
-    <!-- ==========================================
-         MEMBERSHIP
-         ========================================== -->
-    <section class="membership" id="membership">
-        <div class="section-inner">
-            <div class="section-label reveal">Membership</div>
-            <h2 class="section-title reveal">Consistent care. Beautiful skin.</h2>
-            <p class="section-text reveal">Our membership keeps the momentum going - a monthly treatment, product savings, and priority access to your practitioner.</p>
-
-            <div class="membership-cards">
-                <div class="membership-card reveal reveal-delay-1">
-                    <h3>Lumiere Membership</h3>
-                    <div class="membership-price">$249<span> /month</span></div>
-                    <ul class="membership-list">
-                        <li>1 signature facial each month</li>
-                        <li>10% off all additional treatments</li>
-                        <li>15% off retail skincare</li>
-                        <li>Priority booking</li>
-                        <li>Annual skin analysis with Sophie</li>
-                        <li>No lock-in - cancel anytime</li>
-                    </ul>
-                </div>
-
-                <div class="membership-card featured reveal reveal-delay-2">
-                    <h3>Lumiere Premium</h3>
-                    <div class="membership-price">$399<span> /month</span></div>
-                    <ul class="membership-list">
-                        <li>1 advanced treatment monthly</li>
-                        <li>20% off retail skincare</li>
-                        <li>Complimentary LED with every visit</li>
-                        <li>Quarterly skin review with Sophie</li>
-                        <li>Priority booking</li>
-                        <li>No lock-in - cancel anytime</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Membership section removed - demo focuses on consultation booking -->
 
     <!-- Image break: skincare products -->
     <div class="image-break" style="height: 35vh; min-height: 250px;">
@@ -1520,33 +1483,10 @@
     </footer>
 
     <!-- ==========================================
-         CHATBOT WIDGET
+         ARIA - ElevenLabs Conversational AI Widget
          ========================================== -->
-    <div class="chat-widget" id="chatWidget">
-        <div class="chat-window" id="chatWindow">
-            <div class="chat-header">
-                <div class="chat-avatar">L</div>
-                <div class="chat-header-text">
-                    <h4>Lumiere</h4>
-                    <span>Online now</span>
-                </div>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="chat-msg bot">
-                    <div class="msg-bubble">Hi! Welcome to Lumiere Skin & Body. I'm here to help you find the right treatment and practitioner for your skin. To get started, what's your first name?</div>
-                </div>
-            </div>
-            <div class="chat-input-wrap">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." autocomplete="off">
-                <button class="chat-send" id="chatSend">
-                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                </button>
-            </div>
-        </div>
-        <div class="chat-bubble" id="chatBubble">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-    </div>
+    <elevenlabs-convai agent-id="agent_6101kp9zqrwke0pvtjjvdd9n9nq3"></elevenlabs-convai>
+    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
 
     <!-- ==========================================
          SCRIPTS
@@ -1593,27 +1533,23 @@
             });
         });
 
-        // Chatbot widget
-        const chatBubble = document.getElementById('chatBubble');
-        const chatWindow = document.getElementById('chatWindow');
-        const chatInput = document.getElementById('chatInput');
-        const chatSend = document.getElementById('chatSend');
-        const chatMessages = document.getElementById('chatMessages');
+        // Aria is powered by ElevenLabs Conversational AI widget
+        // No custom chatbot JS needed - the widget handles everything
 
-        chatBubble.addEventListener('click', () => {
-            chatWindow.classList.toggle('open');
-            if (chatWindow.classList.contains('open')) {
-                chatInput.focus();
-            }
+        // Old JS chatbot removed - Aria (ElevenLabs) handles all conversations
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
         });
 
-        // ==========================================
-        // INTELLIGENT TRIAGE CHATBOT
-        // Conversational flow: qualify > recommend path > route to practitioner
-        // ==========================================
-
-        let chatState = 'greeting'; // greeting, concern, duration, previous, sensitivity, recommend, booking, general
-        let clientProfile = {
+        /* OLD CHATBOT CODE REMOVED - replaced by ElevenLabs widget
+        let chatState_REMOVED = 'greeting';
+        let clientProfile_REMOVED = {
             name: '',
             concern: '',
             duration: '',
@@ -1915,19 +1851,7 @@
             processMessage(msg);
         }
 
-        chatSend.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(a.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
+        END OF REMOVED CODE */
     </script>
 
 </body>
