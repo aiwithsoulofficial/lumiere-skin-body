@@ -1800,6 +1800,26 @@
                         const path = pathways[clientProfile.concern];
                         await addBotMessage(clientProfile.practitioner + " will give you a complete pricing breakdown during your consultation, tailored to exactly what your skin needs. The consultation fee is fully redeemable on treatment. We also offer Afterpay and Zip for courses. Ready to book?", 1000);
                         addQuickReplies(['Yes, book me in!', 'I need to think about it']);
+                    } else if (lower.includes('loose') || lower.includes('neck') || lower.includes('sagging') || lower.includes('jowl') || lower.includes('double chin') || lower.includes('jawline')) {
+                        await addBotMessage("Skin laxity on the neck and jawline is one of the most common concerns we see. Venus Viva uses radio frequency to stimulate collagen deep in the skin, which helps tighten and firm over time. It's comfortable, no downtime, and we have a $199 special running on full face treatments right now.", 1000);
+                        await addBotMessage("A consultation with Sophie would let her assess your skin and recommend the best approach - sometimes a combination of treatments gives the strongest results. Would you like to book in?", 900);
+                        addQuickReplies(['Yes, book me in', 'What other options are there?']);
+                    } else if (lower.includes('pigment') || lower.includes('sun') || lower.includes('dark spot') || lower.includes('melasma') || lower.includes('brown')) {
+                        await addBotMessage("Pigmentation and sun damage respond really well to clinical treatments. Depending on the type and depth, options can include chemical peels, IPL, or targeted laser treatments. The approach depends on your skin type and the kind of pigmentation.", 1000);
+                        await addBotMessage("Sophie or Megan can do a proper skin analysis to identify the best pathway for you. Would you like to book a consultation?", 800);
+                        addQuickReplies(['Yes, book me in', 'Tell me about Venus Viva']);
+                    } else if (lower.includes('acne') || lower.includes('breakout') || lower.includes('pimple') || lower.includes('oily')) {
+                        await addBotMessage("Active acne and breakouts benefit from a clinical approach that goes beyond what skincare alone can do. We use treatments like LED light therapy, chemical peels, and HydraFacials to target breakouts at the source.", 900);
+                        await addBotMessage("Megan specialises in acne management and can build a treatment plan specific to your skin. Would you like to book a consultation?", 800);
+                        addQuickReplies(['Yes, book me in', 'What other treatments do you offer?']);
+                    } else if (lower.includes('wrinkle') || lower.includes('fine line') || lower.includes('ageing') || lower.includes('aging') || lower.includes('crow')) {
+                        await addBotMessage("Fine lines and wrinkles respond well to treatments that boost collagen production. Venus Viva RF skin tightening is one of our most popular options - it's comfortable, has no downtime, and results build over time. We have a $199 special on right now.", 1000);
+                        await addBotMessage("For a personalised anti-ageing plan, a consultation with Sophie is the best starting point. Would you like to book in?", 800);
+                        addQuickReplies(['Yes, book me in', 'What about injectables?']);
+                    } else if (lower.includes('inject') || lower.includes('botox') || lower.includes('filler') || lower.includes('lip')) {
+                        await addBotMessage("We do offer injectable treatments at the clinic. Because these are prescription-only, they need to be discussed in a consultation with Dr Whitfield, our medical practitioner. He can walk you through all the options, what to expect, and pricing.", 900);
+                        await addBotMessage("Would you like to book a consultation with Dr Whitfield?", 700);
+                        addQuickReplies(['Yes, book with Dr Whitfield', 'What non-injectable options are there?']);
                     } else if (lower.includes('scar') || lower.includes('deep') || lower.includes('pitting') || lower.includes('pock')) {
                         await addBotMessage("For deeper scarring, there are several clinical options that go beyond standard microneedling - including RF microneedling which delivers energy deeper into the skin, and laser resurfacing treatments. The right approach really depends on the type and depth of scarring.", 900);
                         await addBotMessage("This is exactly the kind of concern that benefits from a proper skin assessment. " + clientProfile.practitioner + " can evaluate your scarring in person and recommend the most effective pathway. Would you like to book that consultation?", 1000);
