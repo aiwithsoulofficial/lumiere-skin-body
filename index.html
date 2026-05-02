@@ -1800,8 +1800,24 @@
                         const path = pathways[clientProfile.concern];
                         await addBotMessage(clientProfile.practitioner + " will give you a complete pricing breakdown during your consultation, tailored to exactly what your skin needs. The consultation fee is fully redeemable on treatment. We also offer Afterpay and Zip for courses. Ready to book?", 1000);
                         addQuickReplies(['Yes, book me in!', 'I need to think about it']);
+                    } else if (lower.includes('scar') || lower.includes('deep') || lower.includes('pitting') || lower.includes('pock')) {
+                        await addBotMessage("For deeper scarring, there are several clinical options that go beyond standard microneedling - including RF microneedling which delivers energy deeper into the skin, and laser resurfacing treatments. The right approach really depends on the type and depth of scarring.", 900);
+                        await addBotMessage("This is exactly the kind of concern that benefits from a proper skin assessment. " + clientProfile.practitioner + " can evaluate your scarring in person and recommend the most effective pathway. Would you like to book that consultation?", 1000);
+                        addQuickReplies(['Yes, book me in', 'What other treatments do you offer?']);
+                    } else if (lower.includes('treatment') || lower.includes('offer') || lower.includes('option') || lower.includes('what do you')) {
+                        await addBotMessage("We offer a wide range of clinical skin treatments including LED light therapy, chemical peels, HydraFacials, RF skin tightening with Venus Viva, microneedling, and advanced dermal therapies. For concerns that involve prescription treatments, we have Dr Whitfield available for medical consultations.", 1000);
+                        await addBotMessage("The best way to find the right treatment for your specific concern is through a consultation. Would you like me to book you in?", 800);
+                        addQuickReplies(['Yes, book me in', 'Tell me about Venus Viva']);
+                    } else if (lower.includes('venus') || lower.includes('tighten') || lower.includes('rf')) {
+                        await addBotMessage("Venus Viva uses DiamondPolar technology - a combination of radio frequency and electromagnetic pulses that stimulates natural collagen production. It's comfortable, like a warm massage, with no downtime. We currently have a special on at $199 for a full face treatment.", 1000);
+                        await addBotMessage("Would you like to book a consultation to see if Venus Viva is right for your skin?", 700);
+                        addQuickReplies(['Yes, book me in', 'What other treatments do you offer?']);
+                    } else if (lower.includes('think') || lower.includes('later') || lower.includes('not sure')) {
+                        await addBotMessage("No pressure at all. If you'd like to come in and just have a chat with " + clientProfile.practitioner + " about your options, consultations are completely no-obligation. Otherwise feel free to message us anytime you're ready.", 900);
+                        addQuickReplies(['Book a consultation', 'I\'ll come back later']);
                     } else {
-                        await addBotMessage("Of course - what would you like to know? I'm happy to answer any questions before we book.", 700);
+                        await addBotMessage("That's a great question. To give you the most accurate answer, I'd recommend discussing that with " + clientProfile.practitioner + " during a consultation. They can assess your skin and give you a tailored recommendation. Would you like me to book you in?", 900);
+                        addQuickReplies(['Yes, book me in', 'I have another question']);
                     }
                     break;
 
