@@ -1730,7 +1730,7 @@
                         await addBotMessage("Thanks for sharing that, " + clientProfile.name + ". We work with a lot of clients on concerns around lines and facial contouring, and there are some really effective options available.", 800);
                         await addBotMessage("Because some of these treatments fall under medical regulations, the best way to explore your options is through " + path.treatments + ".", 1200);
                         await addBotMessage("<strong>" + path.practitioner + "</strong>, " + path.practitionerTitle + ", is available Wednesdays and Thursdays. " + path.reason + ".", 1000);
-                        await addBotMessage("The consultation is " + path.startPrice + " and takes about 30 minutes. He'll walk you through everything - options, pricing, timeline, all of it. No pressure, just information. Would you like me to book you in?", 1000);
+                        await addBotMessage("A consultation takes about 30 minutes. He'll walk you through everything - options, pricing, timeline, all of it. No pressure, just information. Would you like me to book you in?", 1000);
                         chatState = 'booking';
                         addQuickReplies(['Yes, book me in', 'What days are available?', 'I have more questions first']);
                         break;
@@ -1761,7 +1761,7 @@
                     let recommendation = "<strong>Your recommended pathway:</strong> " + path.treatments + "<br><br>";
                     recommendation += "<strong>Your practitioner:</strong> " + path.practitioner + ", " + path.practitionerTitle + ". " + path.reason + ".<br><br>";
                     recommendation += "<strong>Expected timeline:</strong> " + path.timeline + "<br>";
-                    recommendation += "<strong>Starting from:</strong> " + path.startPrice;
+                    recommendation += "<strong>Next step:</strong> Book a consultation for a personalised treatment plan and pricing";
 
                     await addBotMessage(recommendation, 1400);
 
@@ -1769,7 +1769,7 @@
                         await addBotMessage("Since this is your first time, " + path.practitioner + " will start with a thorough skin analysis to confirm the right approach before any treatment. There's absolutely no pressure - the consultation is about understanding your skin and giving you a clear plan.", 1200);
                     }
 
-                    await addBotMessage("Would you like me to book your consultation with " + path.practitioner + "? It's $50, fully redeemable on your first treatment.", 800);
+                    await addBotMessage("Would you like me to book your consultation with " + path.practitioner + "? There's a small booking fee that's fully redeemable on your first treatment.", 800);
                     clientProfile.practitioner = path.practitioner;
                     chatState = 'booking';
                     addQuickReplies(['Yes, book me in!', 'What days are available?', 'How much will the full course cost?']);
@@ -1798,7 +1798,7 @@
                         addQuickReplies(['Yes please', 'Next week would be better']);
                     } else if (lower.includes('cost') || lower.includes('much') || lower.includes('price')) {
                         const path = pathways[clientProfile.concern];
-                        await addBotMessage(clientProfile.practitioner + " will give you a complete pricing breakdown during your consultation, tailored to exactly what your skin needs. The consultation itself is " + (clientProfile.concern === 'lines' ? '$120' : '$50') + " and that's redeemable on treatment. We also offer Afterpay and Zip for courses. Ready to book?", 1000);
+                        await addBotMessage(clientProfile.practitioner + " will give you a complete pricing breakdown during your consultation, tailored to exactly what your skin needs. The consultation fee is fully redeemable on treatment. We also offer Afterpay and Zip for courses. Ready to book?", 1000);
                         addQuickReplies(['Yes, book me in!', 'I need to think about it']);
                     } else {
                         await addBotMessage("Of course - what would you like to know? I'm happy to answer any questions before we book.", 700);
@@ -1806,7 +1806,7 @@
                     break;
 
                 case 'collect_details':
-                    await addBotMessage("Booked! I've reserved that spot for you with " + clientProfile.practitioner + ". I'll just need your email address and phone number to confirm. A $50 deposit secures the appointment (redeemable on treatment).", 1000);
+                    await addBotMessage("Booked! I've reserved that spot for you with " + clientProfile.practitioner + ". I'll just need your email address and phone number to confirm. A small deposit secures the appointment and is fully redeemable on your treatment.", 1000);
                     await addBotMessage("You'll receive a confirmation email with:<br>- Your appointment details<br>- A link to complete your intake form<br>- Pre-appointment checklist<br>- Parking info for Mosman<br><br>" + clientProfile.practitioner + " will review your intake form before your visit, so you won't need to repeat anything when you arrive. We're looking forward to meeting you, " + clientProfile.name + "! \u2728", 1400);
                     chatState = 'done';
                     break;
@@ -1826,13 +1826,13 @@
         function handleGeneralQuery(msg) {
             const lower = msg.toLowerCase();
             if (lower.includes('price') || lower.includes('cost') || lower.includes('how much')) {
-                return "Our treatments range from $75 (LED) to $999 (advanced skin tightening face & neck). Course pricing saves up to 15%. For the most accurate pricing, our practitioners build a plan specific to your skin during your consultation. Want me to help you figure out the right pathway?";
+                return "Pricing is tailored to your individual treatment plan, which is why we recommend starting with a consultation. Our practitioners will walk you through all the options and costs with no obligation. We do have a Venus Viva skin tightening special on at the moment for $199 if that interests you. Want me to help you book a consultation?";
             }
             if (lower.includes('hurt') || lower.includes('pain') || lower.includes('scared') || lower.includes('nervous')) {
                 return "Completely understandable - that's one of the most common questions we hear. Most clients are genuinely surprised at how comfortable treatments are. We use numbing cream where needed and adjust every setting to your comfort level. LED and HydraFacial have zero discomfort. You're in control the entire time.";
             }
             if (lower.includes('member') || lower.includes('monthly')) {
-                return "Our Lumiere Membership is $249/month - includes a monthly facial, 10-15% off skincare, and priority booking. No lock-in. Our Premium membership at $399/month includes a monthly advanced treatment plus 20% off skincare. Want to know more?";
+                return "We offer membership options that include regular treatments and skincare discounts. The best way to find the right plan for you is through a consultation where we can match a membership to your skin goals. Would you like to book one?";
             }
             if (lower.includes('hour') || lower.includes('open') || lower.includes('close')) {
                 return "We're open Monday to Friday 9am-6pm and Saturday 9am-3pm. Sunday we're closed. Saturday appointments fill fastest - book early!";
