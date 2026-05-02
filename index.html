@@ -1842,8 +1842,11 @@
                     break;
 
                 case 'collect_details':
-                    await addBotMessage("Booked! I've reserved that spot for you with " + clientProfile.practitioner + ". I'll just need your email address and phone number to confirm. A small deposit secures the appointment and is fully redeemable on your treatment.", 1000);
-                    await addBotMessage("You'll receive a confirmation email with:<br>- Your appointment details<br>- A link to complete your intake form<br>- Pre-appointment checklist<br>- Parking info for Mosman<br><br>" + clientProfile.practitioner + " will review your intake form before your visit, so you won't need to repeat anything when you arrive. We're looking forward to meeting you, " + clientProfile.name + "! \u2728", 1400);
+                    await addBotMessage("Perfect! I'll open up our booking page so you can choose the exact time that works best for you with " + clientProfile.practitioner + ". It's a 30-minute consultation and any booking fee is fully redeemable on your treatment.", 1000);
+                    await addBotMessage("Once you've booked you'll receive a confirmation email with your appointment details and a pre-visit checklist. We're looking forward to meeting you, " + clientProfile.name + "! \u2728", 800);
+                    setTimeout(function() {
+                        window.open('https://api.leadconnectorhq.com/widget/bookings/lumiere-consultation', '_blank');
+                    }, 1500);
                     chatState = 'done';
                     break;
 
