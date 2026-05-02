@@ -1483,10 +1483,33 @@
     </footer>
 
     <!-- ==========================================
-         ARIA - ElevenLabs Conversational AI Widget
+         ARIA TEXT CHATBOT
          ========================================== -->
-    <elevenlabs-convai agent-id="agent_6101kp9zqrwke0pvtjjvdd9n9nq3"></elevenlabs-convai>
-    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+    <div class="chat-widget">
+        <div class="chat-bubble" id="chatBubble" onclick="document.getElementById('chatWindow').classList.toggle('open')">
+            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm0 15.17L18.83 16H4V4h16v13.17z"/></svg>
+        </div>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div class="chat-avatar">A</div>
+                <div class="chat-header-text">
+                    <h4>Aria - Virtual Concierge</h4>
+                    <span>Lumiere Skin & Body</span>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-msg bot">
+                    <div class="msg-bubble">Hi there! I'm Aria, your virtual skin concierge at Lumiere. I can help you find the right treatment pathway for your skin. What's your name?</div>
+                </div>
+            </div>
+            <div class="chat-input-wrap">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter')sendMessage()">
+                <button class="chat-send" onclick="sendMessage()">
+                    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- ==========================================
          SCRIPTS
@@ -1547,9 +1570,9 @@
             });
         });
 
-        /* OLD CHATBOT CODE REMOVED - replaced by ElevenLabs widget
-        let chatState_REMOVED = 'greeting';
-        let clientProfile_REMOVED = {
+        /* Text chatbot restored */
+        let chatState = 'greeting';
+        let clientProfile = {
             name: '',
             concern: '',
             duration: '',
@@ -1851,7 +1874,7 @@
             processMessage(msg);
         }
 
-        END OF REMOVED CODE */
+        /* End of chatbot code */
     </script>
 
 </body>
