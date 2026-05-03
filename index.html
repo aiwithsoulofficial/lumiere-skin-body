@@ -1135,7 +1135,7 @@
          ========================================== -->
     <nav id="nav">
         <a href="#" class="nav-logo">LUMIERE</a>
-        <a href="#book" class="nav-cta">Book Consultation</a>
+        <a href="https://api.leadconnectorhq.com/widget/bookings/lumiere-consultation" target="_blank" class="nav-cta">Book Consultation</a>
     </nav>
 
     <!-- ==========================================
@@ -1152,7 +1152,7 @@
             <div class="hero-tagline">Mosman, Sydney</div>
             <h1>You don't need to know what advanced skin tightening is.<br>You just need to know <em>who to trust.</em></h1>
             <p class="hero-sub">Expert-led skin consultations in Mosman.<br>No jargon. No pressure. Just a plan.</p>
-            <a href="#book" class="hero-cta">Book Your Consultation</a>
+            <a href="https://api.leadconnectorhq.com/widget/bookings/lumiere-consultation" target="_blank" class="hero-cta">Book Your Consultation</a>
             <span class="hero-safety">$50 consultation fee, redeemable on your first treatment</span>
         </div>
         <div class="scroll-indicator">
@@ -1465,7 +1465,7 @@
         <div class="section-inner">
             <h2 class="section-title reveal">Walk in with questions.<br>Walk out with clarity.</h2>
             <p class="section-text reveal">Your consultation is 30 minutes. Your plan is personalised. Your first step is easy.</p>
-            <a href="#" class="hero-cta reveal">Book Your Consultation</a>
+            <a href="https://api.leadconnectorhq.com/widget/bookings/lumiere-consultation" target="_blank" class="hero-cta reveal">Book Your Consultation</a>
             <span class="hero-safety reveal" style="color: rgba(255,255,255,0.4); display: block; margin-top: 1rem; font-size: 0.75rem;">$50 consultation fee, redeemable on your first treatment. Afterpay available.</span>
         </div>
     </section>
@@ -1777,17 +1777,12 @@
 
                 case 'booking':
                     if (lower.includes('yes') || lower.includes('book')) {
-                        chatState = 'collect_details';
-                        const prac = clientProfile.practitioner;
-                        let availability = '';
-                        if (prac === 'Dr. James Whitfield') {
-                            availability = 'Dr. Whitfield is available <strong>Wednesday 10am, 11:30am, or 2pm</strong> and <strong>Thursday 9:30am or 3pm</strong> this week.';
-                        } else if (prac === 'Megan') {
-                            availability = 'Megan is available <strong>Tuesday 10am or 2pm</strong>, <strong>Wednesday 11am</strong>, <strong>Thursday 9am</strong>, or <strong>Saturday 10am</strong> this week.';
-                        } else {
-                            availability = 'Sophie is available <strong>Monday 2pm</strong>, <strong>Wednesday 10am or 3pm</strong>, or <strong>Friday 11am</strong> this week.';
-                        }
-                        await addBotMessage("Wonderful! " + availability + " Which time suits you best?", 800);
+                        chatState = 'done';
+                        await addBotMessage("Wonderful! I'll open up our booking page so you can choose the perfect time with " + clientProfile.practitioner + ". It's a 30-minute consultation and any booking fee is fully redeemable on your first treatment.", 800);
+                        await addBotMessage("We're looking forward to meeting you, " + clientProfile.name + "! \u2728", 600);
+                        setTimeout(function() {
+                            window.open('https://api.leadconnectorhq.com/widget/bookings/lumiere-consultation', '_blank');
+                        }, 1500);
                     } else if (lower.includes('day') || lower.includes('avail') || lower.includes('when')) {
                         const prac = clientProfile.practitioner;
                         let days = '';
